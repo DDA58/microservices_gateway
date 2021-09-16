@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  gateway:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    image: gateway
+    container_name: ${APP_NAME}_gateway
+    restart: unless-stopped
+    working_dir: /var/www/gateway
+    volumes:
+      - ./:/var/www/gateway
+  nginx_gateway:
+    image: nginx:alpine
+    container_name: ${APP_NAME}_gateway_nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/gateway
+      - ./docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - gateway
+networks:
+  default:
+    external: true
+    name: microservices
