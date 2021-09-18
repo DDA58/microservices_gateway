@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Services\Gateway;
+use Illuminate\Http\Response;
 
 class GatewayController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @param Gateway $gateway
+     * @return Response
      */
-    public function __invoke(Gateway $gateway)
+    public function __invoke(Gateway $gateway): Response
     {
         return $gateway->requestToService();
     }

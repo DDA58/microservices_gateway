@@ -2,7 +2,7 @@
 
 namespace App\Services\Microservice;
 
-class FilesLists
+class FilesLists extends AMicroservice
 {
 
 }

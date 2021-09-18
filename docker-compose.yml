@@ -3,14 +3,14 @@ version: '3.5'
 services:
   gateway:
     build:
-      context: ./
+      context: ${REL_PATH_GATEWAY:-.}/
       dockerfile: ./docker/Dockerfile
     image: gateway
     container_name: ${APP_NAME}_gateway
     restart: unless-stopped
-    working_dir: /var/www/gateway
+    working_dir: /var/www/app
     volumes:
-      - ./:/var/www/gateway
+      - ${REL_PATH_GATEWAY:-.}/:/var/www/app
   nginx_gateway:
     image: nginx:alpine
     container_name: ${APP_NAME}_gateway_nginx
@@ -18,11 +18,10 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./:/var/www/gateway
-      - ./docker/nginx:/etc/nginx/conf.d
+      - ${REL_PATH_GATEWAY:-.}/:/var/www/app
+      - ${REL_PATH_GATEWAY:-.}/docker/nginx:/etc/nginx/conf.d
     depends_on:
       - gateway
 networks:
   default:
-    external: true
     name: microservices

@@ -37,9 +37,9 @@ class Gateway
 
         foreach (config('microservices') as $name => $config) {
             if ($prefix === $name) {
-                $this->app->singleton('AMicroservice', fn() => new $config['classname']($config, $request));
+                $this->app->singleton('microservice', fn() => new $config['classname']($config, $request));
 
-                return $this->app->AMicroservice;
+                return $this->app->microservice;
             }
         }
 

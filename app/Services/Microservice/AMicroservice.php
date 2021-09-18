@@ -51,7 +51,10 @@ abstract class AMicroservice
     }
 
     protected function getUri(): string {
-        return $this->config['host'].'/'.$this->request->microservice_name.'/'.$this->request->microservice_querystring;
+        $query = $this->request->getQueryString();
+
+        return $this->config['host'].'/'.$this->request->microservice_name.'/'.$this->request->microservice_querystring.
+            ($query === null ? '' : '?'.$query);
     }
 
     protected function preRequest(): void

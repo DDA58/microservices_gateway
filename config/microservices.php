@@ -13,7 +13,7 @@ return [
         'host' => 'nginx_files_downloader',
         'classname' => \App\Services\Microservice\FilesDownloader::class
     ],
-    'reports' => [
+    'files_lists' => [
         'host' => 'nginx_files_lists',
         'classname' => \App\Services\Microservice\FilesLists::class
     ]
